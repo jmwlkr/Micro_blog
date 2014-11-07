@@ -29,7 +29,7 @@ end
 
 post "/signup" do
   puts params.inspect
-  if User.where(params[:user].email).first
+  if User.where(email: params[:user][:email]).first
     flash[:alert] = "You Stink"
     redirect "/"
   end
@@ -68,6 +68,22 @@ post "/post/new" do
                    user_id: session[:user_id])
   if @post.save
     flash[:notice] = "Post was Successfully Created"
+  end
+  redirect "/"
+end
+
+get "/post/:potato/delete" do
+  puts "HEY THERE!!!"
+  p params
+  puts "----"
+  p params[:potato]
+  @post = Post.find(params[:potato])
+  if @post.user_id != session[:user_id]
+    flash[:alert] = "YOU ARE NOT THAT USER"
+  else
+    if @post.destroy
+      flash[:notice] = "THE POST WAS DESTROYED"
+    end
   end
   redirect "/"
 end
