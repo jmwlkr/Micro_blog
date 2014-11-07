@@ -1,0 +1,84 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <style>
+    .notice{
+      background: green;
+      padding: 10px 15px;
+      border-radius: 3px;
+    }
+    .alert{
+      background: red;
+      padding: 10px 15px;
+      border-radius: 3px;
+    }
+    </style>
+  </head>
+  <body>
+    <% if flash[:notice] %>
+      <em class="notice">
+        <%= flash[:notice] %>
+      </em>  
+    <% end %>
+    <% if flash[:alert] %>
+      <strong class="alert">
+        <%= flash[:alert] %>
+      </strong>  
+    <% end %>
+
+    <a href="/signup">SIGN UP HERE</a>
+
+    <% if @user %>
+
+      <h1><%= @user.fname %></h1>
+      <a href="/logout">LOGOUT</a>
+      <a href="/post/new">CREATE NEW POST</a>
+
+
+
+      <% if @followers %>
+      <h2>Followers</h2>
+      <ul>
+        <% @followers.each do |follower| %>
+        <li>
+          <%= "#{ follower.fname } #{ follower.lname }" %>
+        </li>
+        <% end %>
+      </ul>
+      <% end %> 
+
+      <% if @following %>
+      <h2>Following</h2>
+      <ul>
+        <% @following.each do |leader| %>
+        <li>
+          <%= "#{ leader.fname } #{ leader.lname }" %>
+        </li>
+        <% end %>
+      </ul>
+      <% end %> 
+
+    <% else %>
+      <h1>NOT LOGGED IN</h1>  
+      <form action="/login" method="POST">
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Email">
+
+        <input
+          type="password"
+          name="password"
+          placeholder="Password">
+
+        <input type="submit">
+
+      </form>
+    <% end %>
+
+
+
+
+  </body>
+</html>
