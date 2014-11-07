@@ -14,9 +14,11 @@ get "/" do
   else
     @user = User.find(session[:user_id])
   end
+
   @posts = Post.all
-  @followers = @user.followers
-  @following = @user.leaders
+
+  # @followers = @user.followers
+  # @following = @user.leaders
 
   erb :index
 end
@@ -65,11 +67,10 @@ post "/post/new" do
   @post = Post.new(text: params[:text], 
                    user_id: session[:user_id])
   if @post.save
-    flash[:notice] = "Successfully Created Post"
-  else
-    flash[:alert] = "Your Post was not Created"
+    flash[:notice] = "Post was Successfully Created"
   end
   redirect "/"
 end
+
 
 

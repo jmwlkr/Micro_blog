@@ -32,8 +32,20 @@
 
       <h1><%= @user.fname %></h1>
       <a href="/logout">LOGOUT</a>
-      <a href="/post/new">CREATE NEW POST</a>
 
+    <% if @posts %>
+      <ul>
+        <% @posts.each do |post| %>
+          <li>
+            <ul>
+              <li><%= "USER NAME" %></li>
+              <li><%= post.text %></li>
+              <li><%= post.created_at %></li>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
 
 
       <% if @followers %>
