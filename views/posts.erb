@@ -2,7 +2,18 @@
   <h1>All Posts</h1>
   <ul>
   <% @posts.each do |post| %>
-    <li><%= post.text %></li>
+    <li class="post">
+      <a href=<%= "/profile/#{ post.user_id }" %>>
+        <%= "#{ post.user.fname } #{ post.user.lname } says," %>
+      </a>
+      <p class="post-text"><%= post.text %></p>
+      <date><%= post.created_at %></date>
+
+      <% if current_user && current_user.id == post.user_id %>
+        <a class="delete-button"
+           href=<%= "/post/#{ post.id }/delete" %>>DELETE</a>
+      <% end %>
+    </li>
   <% end %>
   </ul>
 </main>

@@ -1,27 +1,8 @@
 <main>
-  <a href="/signup">SIGN UP HERE</a>
 
-  <% if @user %>
+  <% if current_user %>
+    <h1>Welcome <%= current_user.fname %>!</h1>
 
-    <h1><%= @user.fname %></h1>
-    <a href="/logout">LOGOUT</a>
-
-  <% if @posts %>
-    <ul>
-      <% @posts.each do |post| %>
-        <li>
-          <ul>
-            <li>
-              <%= "#{ post.user.fname } #{ post.user.lname } says," %>
-            </li>
-            <li><%= post.text %></li>
-            <li><%= post.created_at %></li>
-            <li><a href=<%= "/post/#{ post.id }/delete" %>>DELETE</a></li>
-          </ul>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
 
 
     <% if @followers %>

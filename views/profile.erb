@@ -1,0 +1,38 @@
+<main>
+  <% if current_user && current_user.id == @user %>
+    <form method="POST" action="/profile/new">
+      <textarea
+        name="[profile]bio"
+        placeholder="Write your bio here">
+        <% if @profile %>
+          <%= @profile.text %>
+        <% end %>
+      </textarea>
+
+      <input type="submit" value="Create Profile">
+    </form>
+  <% else %>
+    <h1><%= @user.fname %>'s Profile</h1>
+    <% if @profile %>
+      <p><%= @profile.text %></p>
+    <% else %>
+      <span>This user did not fill out his bio</span>
+    <% end %>
+  <% end %>
+
+  <% if @posts %>
+  <ul>
+  <% @posts.each do |post| %>
+      <li>
+        <p><%= post.text %></p>
+        <date><%= post.created_at %></date>
+
+        <% if current_user && current_user.id == @user %>
+          <a class="delete-button"
+             href=<%= "/post/#{ post.id }/delete" %>>DELETE</a>
+        <% end %>
+      </li>
+  <% end %>
+  </ul>
+  <% end %>
+</main>
