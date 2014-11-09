@@ -27,7 +27,8 @@ get "/" do
 end
 
 get "/posts" do
-
+  @posts = Post.all
+  erb :posts
 end
 
 get "/signup" do
@@ -45,7 +46,7 @@ post "/signup" do
     session[:user_id] = @user.id
     flash[:notice] = "Successfully Signed Up"
   else
-    flash[:alert] = "You Stink"
+    flash[:alert] = "The Account was not successfully created"
   end
   redirect "/"
 end
