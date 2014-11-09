@@ -1,99 +1,67 @@
-<!DOCTYPE>
-<html>
-  <head>
-    <style>
-    .notice{
-      background: green;
-      padding: 10px 15px;
-      border-radius: 3px;
-    }
-    .alert{
-      background: red;
-      padding: 10px 15px;
-      border-radius: 3px;
-    }
-    </style>
-  </head>
-  <body>
-    <% if flash[:notice] %>
-      <em class="notice">
-        <%= flash[:notice] %>
-      </em>  
-    <% end %>
-    <% if flash[:alert] %>
-      <strong class="alert">
-        <%= flash[:alert] %>
-      </strong>  
-    <% end %>
+<main>
+  <a href="/signup">SIGN UP HERE</a>
 
-    <a href="/signup">SIGN UP HERE</a>
+  <% if @user %>
 
-    <% if @user %>
+    <h1><%= @user.fname %></h1>
+    <a href="/logout">LOGOUT</a>
 
-      <h1><%= @user.fname %></h1>
-      <a href="/logout">LOGOUT</a>
-
-    <% if @posts %>
-      <ul>
-        <% @posts.each do |post| %>
-          <li>
-            <ul>
-              <li>
-                <%= "#{ post.user.fname } #{ post.user.lname } says," %>
-              </li>
-              <li><%= post.text %></li>
-              <li><%= post.created_at %></li>
-              <li><a href=<%= "/post/#{ post.id }/delete" %>>DELETE</a></li>
-            </ul>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
-
-
-      <% if @followers %>
-      <h2>Followers</h2>
-      <ul>
-        <% @followers.each do |follower| %>
+  <% if @posts %>
+    <ul>
+      <% @posts.each do |post| %>
         <li>
-          <%= "#{ follower.fname } #{ follower.lname }" %>
+          <ul>
+            <li>
+              <%= "#{ post.user.fname } #{ post.user.lname } says," %>
+            </li>
+            <li><%= post.text %></li>
+            <li><%= post.created_at %></li>
+            <li><a href=<%= "/post/#{ post.id }/delete" %>>DELETE</a></li>
+          </ul>
         </li>
-        <% end %>
-      </ul>
-      <% end %> 
+      <% end %>
+    </ul>
+  <% end %>
 
-      <% if @following %>
-      <h2>Following</h2>
-      <ul>
-        <% @following.each do |leader| %>
-        <li>
-          <%= "#{ leader.fname } #{ leader.lname }" %>
-        </li>
-        <% end %>
-      </ul>
-      <% end %> 
 
-    <% else %>
-      <h1>NOT LOGGED IN</h1>  
-      <form action="/login" method="POST">
-
-        <input
-          type="email"
-          name="email"
-          placeholder="Email">
-
-        <input
-          type="password"
-          name="password"
-          placeholder="Password">
-
-        <input type="submit">
-
-      </form>
+    <% if @followers %>
+    <h2>Followers</h2>
+    <ul>
+      <% @followers.each do |follower| %>
+      <li>
+        <%= "#{ follower.fname } #{ follower.lname }" %>
+      </li>
+      <% end %>
+    </ul>
     <% end %>
 
+    <% if @following %>
+    <h2>Following</h2>
+    <ul>
+      <% @following.each do |leader| %>
+      <li>
+        <%= "#{ leader.fname } #{ leader.lname }" %>
+      </li>
+      <% end %>
+    </ul>
+    <% end %>
 
+  <% else %>
+    <h1>NOT LOGGED IN</h1>
+    <form action="/login" method="POST">
 
+      <input
+        type="email"
+        name="email"
+        placeholder="Email">
 
-  </body>
-</html>
+      <input
+        type="password"
+        name="password"
+        placeholder="Password">
+
+      <input type="submit">
+
+    </form>
+  <% end %>
+</main>

@@ -1,0 +1,48 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="stylesheets/sitewide.css">
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li>
+            <a href="/posts">View Cat Posts</a>
+          </li>
+          <li>
+            <a href="">Signup</a>
+          </li>
+          <li>
+            <a href="">Profile Page</a>
+          </li>
+          <li>
+            <a href="">Login</a>
+          </li>
+          <li>
+            <a href="">Logout</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <% if flash[:notice] %>
+      <em class="notice">
+        <%= flash[:notice] %>
+      </em>
+    <% end %>
+    <% if flash[:alert] %>
+      <strong class="alert">
+        <%= flash[:alert] %>
+      </strong>
+    <% end %>
+
+    <%= yield %>
+
+    <footer>
+
+    </footer>
+
+  </body>
+
+</html>

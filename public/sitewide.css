@@ -1,0 +1,14 @@
+/* RESET INFORMATION */
+
+
+
+.notice{
+  background: green;
+  padding: 10px 15px;
+  border-radius: 3px;
+}
+.alert{
+  background: red;
+  padding: 10px 15px;
+  border-radius: 3px;
+}
