@@ -1,18 +1,22 @@
 <main>
-  <% if current_user && current_user.id == @user %>
+  <h1><%= @user.fname %>'s Profile</h1>
+
+  <% if current_user && current_user.id == @user.id %>
+
     <form method="POST" action="/profile/new">
       <textarea
         name="[profile]bio"
         placeholder="Write your bio here">
         <% if @profile %>
-          <%= @profile.text %>
+          <%= @profile.bio %>
         <% end %>
       </textarea>
 
       <input type="submit" value="Create Profile">
     </form>
+
   <% else %>
-    <h1><%= @user.fname %>'s Profile</h1>
+
     <% if @profile %>
       <p><%= @profile.text %></p>
     <% else %>

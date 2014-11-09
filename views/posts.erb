@@ -3,7 +3,7 @@
   <ul>
   <% @posts.each do |post| %>
     <li class="post">
-      <a href=<%= "/profile/#{ post.user_id }" %>>
+      <a href=<%= "/user/#{ post.user_id }" %>>
         <%= "#{ post.user.fname } #{ post.user.lname } says," %>
       </a>
       <p class="post-text"><%= post.text %></p>

@@ -72,10 +72,36 @@ end
 
 #### PROFILE ROUTES ####
 
-get "/profile/:id" do
+get "/user/:id" do
   @user = User.find(params[:id])
   @profile = @user.profile
-  erb :profile
+  erb :user
+end
+
+post "/profile/new" do
+  p "@@@@@@@@@@@@@@@@"
+  p current_user && current_user.profile
+  p "--------------"
+  if current_user && current_user.profile
+    @profile = current_user.profile
+
+    if @profile.update(params[:profile])
+      flash[:notice] = "Profile Updated"
+    else
+      flash[:alert] = "The Profile was not updated!"
+    end
+  elsif current_user && !current_user.profile
+    @profile = Profile.new(params[:profile])
+    if @profile.save
+      flash[:notice] = "Profile Created"
+    else
+      flash[:alert] = "The Profile was not Created!"
+    end
+  else
+    flash[:alert] = "Something went terribly wrong"
+  end
+
+  redirect "/user/#{ current_user.id }"
 end
 
 #### POSTS ROUTES ####
