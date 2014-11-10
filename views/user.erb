@@ -1,7 +1,7 @@
 <main>
   <h1><%= @user.fname %>'s Profile</h1>
 
-  <% if (@current_user.id == @profile.user_id) %>
+  <% if @profile && (@current_user.id == @profile.user_id) %>
 
     <form method="POST" action="/profile/new">
       <textarea
