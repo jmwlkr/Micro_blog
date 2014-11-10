@@ -23,7 +23,9 @@
     <ul>
       <% @following.each do |leader| %>
       <li>
-        <%= "#{ leader.fname } #{ leader.lname }" %>
+        <a href=<%= "/user/#{ leader.id }" %>>
+          <%= "#{ leader.fname } #{ leader.lname }" %>
+        </a>
       </li>
       <% end %>
     </ul>
@@ -34,7 +36,9 @@
     <ul>
       <% @followers.each do |follower| %>
       <li>
-        <%= "#{ follower.fname } #{ follower.lname }" %>
+        <a href=<%= "/user/#{ follower.id }" %>>
+          <%= "#{ follower.fname } #{ follower.lname }" %>
+        </a>
       </li>
       <% end %>
     </ul>
