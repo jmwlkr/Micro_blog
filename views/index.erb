@@ -3,16 +3,18 @@
   <% if @current_user %>
     <h1>Welcome <%= @current_user.fname %>!</h1>
 
-
-
-    <% if @followers %>
-    <h2>Followers</h2>
+    <% if @following_posts %>
+    <h2>FEED</h2>
     <ul>
-      <% @followers.each do |follower| %>
-      <li>
-        <%= "#{ follower.fname } #{ follower.lname }" %>
+    <% @following_posts.each do |post| %>
+      <li class="post">
+        <a href=<%= "/user/#{ post.user_id }" %>>
+          <%= "#{ post.user.fname } #{ post.user.lname }" %>
+        </a>  says,
+        <p class="post-text"><%= post.text %></p>
+        <small><%= post.created_at %></small>
       </li>
-      <% end %>
+    <% end %>
     </ul>
     <% end %>
 
@@ -27,6 +29,16 @@
     </ul>
     <% end %>
 
+    <% if @followers %>
+    <h2>Followers</h2>
+    <ul>
+      <% @followers.each do |follower| %>
+      <li>
+        <%= "#{ follower.fname } #{ follower.lname }" %>
+      </li>
+      <% end %>
+    </ul>
+    <% end %>
   <% else %>
     <h1>NOT LOGGED IN</h1>
     <form action="/login" method="POST">

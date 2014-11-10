@@ -20,10 +20,11 @@ end
 
 get "/" do
   current_user
-  @posts = Post.all
+  @posts = Post.take(10)
 
-  # @followers = @user.followers
-  # @following = @user.leaders
+  @followers = @current_user.followers
+  @following = @current_user.leaders
+  @following_posts = @following.map(&:posts).first.take(10) #TODO really ugly should fix
 
   erb :index
 end
