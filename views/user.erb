@@ -1,7 +1,7 @@
 <main>
   <h1><%= @user.fname %>'s Profile</h1>
 
-  <% if (current_user.id == @profile.user_id) %>
+  <% if (@current_user.id == @profile.user_id) %>
 
     <form method="POST" action="/profile/new">
       <textarea
@@ -18,12 +18,19 @@
     </form>
 
   <% else %>
+  
+    <% if @follow %>
+      <a href=<%= "/follow/#{ @follow.id }/delete" %>>UnFollow</a>
+    <% else %>
+      <a href=<%= "/user/#{ @user.id }/follow" %>>Follow</a>
+    <% end %>
 
     <% if @profile %>
       <p><%= @profile.bio %></p>
     <% else %>
       <span>This user did not fill out his bio</span>
     <% end %>
+
   <% end %>
 
   <% if @posts %>
@@ -33,7 +40,7 @@
         <p><%= post.text %></p>
         <small><%= post.created_at %></small>
 
-        <% if current_user && current_user.id == post.user_id %>
+        <% if @current_user && @current_user.id == post.user_id %>
           <a class="delete-button"
              href=<%= "/post/#{ post.id }/delete" %>>DELETE</a>
         <% end %>

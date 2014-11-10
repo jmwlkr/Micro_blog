@@ -13,12 +13,12 @@
           <li>
             <a href="/posts">View All Posts</a>
           </li>
-          <% if current_user %>
+          <% if @current_user %>
           <li>
             <a href="/post/new">Create a Post</a>
           </li>
           <li>
-            <a href="/user/<%= current_user.id %>">Profile Page</a>
+            <a href="/user/<%= @current_user.id %>">Profile Page</a>
           </li>
           <li>
             <a href="/logout">Logout</a>

@@ -9,7 +9,7 @@
       <p class="post-text"><%= post.text %></p>
       <small><%= post.created_at %></small>
 
-      <% if current_user && current_user.id == post.user_id %>
+      <% if @current_user && @current_user.id == post.user_id %>
         <a class="delete-button"
            href=<%= "/post/#{ post.id }/delete" %>>DELETE</a>
       <% end %>
