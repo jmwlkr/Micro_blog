@@ -4,10 +4,10 @@
   <% @posts.each do |post| %>
     <li class="post">
       <a href=<%= "/user/#{ post.user_id }" %>>
-        <%= "#{ post.user.fname } #{ post.user.lname } says," %>
-      </a>
+        <%= "#{ post.user.fname } #{ post.user.lname }" %>
+      </a>  says,
       <p class="post-text"><%= post.text %></p>
-      <date><%= post.created_at %></date>
+      <small><%= post.created_at %></small>
 
       <% if current_user && current_user.id == post.user_id %>
         <a class="delete-button"

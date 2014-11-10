@@ -9,9 +9,9 @@ enable :sessions
 # This method is accessible in all of our erb files!! COOL RIGHT!
 def current_user
   if session[:user_id].nil?
-    @user = nil
+    return nil
   else
-    @user = User.find(session[:user_id])
+    return User.find(session[:user_id])
   end
 end
 
@@ -75,14 +75,13 @@ end
 get "/user/:id" do
   @user = User.find(params[:id])
   @profile = @user.profile
+  @posts = @user.posts
   erb :user
 end
 
 post "/profile/new" do
-  p "@@@@@@@@@@@@@@@@"
-  p current_user && current_user.profile
-  p "--------------"
-  if current_user && current_user.profile
+
+  if current_user && !current_user.profile.nil?
     @profile = current_user.profile
 
     if @profile.update(params[:profile])
@@ -91,7 +90,7 @@ post "/profile/new" do
       flash[:alert] = "The Profile was not updated!"
     end
   elsif current_user && !current_user.profile
-    @profile = Profile.new(params[:profile])
+    @profile = Profile.new(bio: params[:profile][:bio], user_id: session[:user_id])
     if @profile.save
       flash[:notice] = "Profile Created"
     else
