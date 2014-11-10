@@ -24,7 +24,11 @@ get "/" do
 
   @followers = @current_user.followers
   @following = @current_user.leaders
-  @following_posts = @following.map(&:posts).first.take(10) #TODO really ugly should fix
+  if @following
+    @following_posts = @following.map(&:posts).first.take(10) #TODO really ugly should fix
+  else
+    @following_posts = nil
+  end
 
   erb :index
 end
